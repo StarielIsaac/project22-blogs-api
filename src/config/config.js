@@ -4,7 +4,7 @@ const suffix = {
   dev: '-dev',
   development: '-dev',
   test: '-test',
-};
+};  
 
 const options = {
   host: process.env.MYSQL_HOST || 'localhost',
