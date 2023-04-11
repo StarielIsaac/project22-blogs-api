@@ -29,4 +29,22 @@ const listUsers = async () => {
   return results;
 };
 
-  module.exports = { createUser, listUsers };
+const findOneUser = async (id) => {
+  const findedUser = await User.findOne({
+    where: { id },
+    attributes: { exclude: ['password'] },
+  });
+
+  if (!findedUser) {
+    // console.log('ja existe essa conta');
+    throw new ErrorLaunch('User does not exist', 404);
+  }
+
+  return findedUser;
+};
+
+  module.exports = { 
+    createUser,
+    listUsers,
+    findOneUser,
+   };
