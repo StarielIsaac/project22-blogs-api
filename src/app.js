@@ -3,6 +3,7 @@ const express = require('express');
 
 const errorHandler = require('./middlewares/errorHandler');
 const loginRouter = require('./routers/loginRouter');
+const userRouter = require('./routers/userRouter');
 // ...
 
 // inicia o express
@@ -18,6 +19,8 @@ app.use(express.json());
 
 // rota para o endpoint "/login"
 app.use('/login', loginRouter); 
+// rota para o endpoint "/user"
+app.use('/user', userRouter);
 
 // middleware de erro genérico ( caso falha da request )
 app.use(errorHandler);
