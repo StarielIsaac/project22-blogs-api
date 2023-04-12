@@ -5,7 +5,6 @@ const { validateToken } = require('../utils/auth');
 const middValidateToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-    
         if (!token) {
             // throw errorMensage(401, 'Token not found');
             return res.status(401).json({ message: 'Token not found' });
