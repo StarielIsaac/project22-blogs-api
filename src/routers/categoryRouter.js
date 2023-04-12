@@ -7,6 +7,7 @@ const validadeName = require('../middlewares/validadeName');
 
 const categoriesRouter = Router();
 
+categoriesRouter.get('', tokenValidade, categoriesController.getAllCategories);
 categoriesRouter.post('', tokenValidade, validadeName, categoriesController.createNewCategories);
 
 module.exports = categoriesRouter;
