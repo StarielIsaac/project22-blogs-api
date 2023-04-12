@@ -4,6 +4,7 @@ const express = require('express');
 const errorHandler = require('./middlewares/errorHandler');
 const loginRouter = require('./routers/loginRouter');
 const userRouter = require('./routers/userRouter');
+const categoryRouter = require('./routers/categoryRouter');
 // ...
 
 // inicia o express
@@ -22,7 +23,9 @@ app.use('/login', loginRouter);
 // rota para o endpoint "/user"
 app.use('/user', userRouter);
 
-// middleware de erro genérico ( caso falha da request )
+app.use('/categories', categoryRouter);
+
+// middleware de erro ( caso falha da request )
 app.use(errorHandler);
 // ...
 
