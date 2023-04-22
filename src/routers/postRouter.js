@@ -8,6 +8,8 @@ const postRouter = Router();
 
 postRouter.get('', middTokenValidade, postController.findBlogPosts);
 
+postRouter.get('/:id', middTokenValidade, postController.findOneBlogPost);
+
 postRouter.post('', middTokenValidade, validadePost, postController.addNewPostAndBing);
 // middTokenValidade
 module.exports = postRouter;

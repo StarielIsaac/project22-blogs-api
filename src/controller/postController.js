@@ -13,4 +13,10 @@ const findBlogPosts = async (req, res) => {
  return res.status(200).json(result);
 };
 
-module.exports = { addNewPostAndBing, findBlogPosts };
+const findOneBlogPost = async (req, res) => {
+   const { id } = req.params;
+   const result = await postService.findOneBlogPost(id);
+   return res.status(200).json(result);
+  };
+
+module.exports = { addNewPostAndBing, findBlogPosts, findOneBlogPost };
