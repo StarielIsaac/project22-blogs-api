@@ -9,7 +9,7 @@ const addNewPostAndBing = async (req, res) => {
 };
 // busca todos os posts registrados
 const findAllBlogPosts = async (req, res) => {
- const result = await postService.findBlogPosts();
+ const result = await postService.findAllBlogPosts();
  return res.status(200).json(result);
 };
 // busca todos um post pelo ID
