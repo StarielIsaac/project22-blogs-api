@@ -6,6 +6,8 @@ const validadePost = require('../middlewares/validadePost');
 
 const postRouter = Router();
 
+postRouter.get('', middTokenValidade, postController.findBlogPosts);
+
 postRouter.post('', middTokenValidade, validadePost, postController.addNewPostAndBing);
 // middTokenValidade
 module.exports = postRouter;

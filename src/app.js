@@ -23,9 +23,9 @@ app.use(express.json());
 app.use('/login', loginRouter); 
 // rota para o endpoint "/user"
 app.use('/user', userRouter);
-
+// rota para o endpoint "/categories"
 app.use('/categories', categoryRouter);
-
+// rota para o endpoint "/post"
 app.use('/post', postRouter);
 
 // middleware de erro ( caso falha da request )

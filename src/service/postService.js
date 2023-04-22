@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory } = require('../models');
+const { BlogPost, PostCategory, User, Category } = require('../models');
 
 // throw new ErrorLaunch('User already registered', 409);
 const addNewPostAndBing = async ({ content, categoryIds, title }, userId) => {
@@ -22,4 +22,36 @@ const addNewPostAndBing = async ({ content, categoryIds, title }, userId) => {
     return newPost;
 };
 
-module.exports = { addNewPostAndBing };
+const findBlogPosts = async () => {
+     // Obtém todos os posts do blog
+     const allBlogPosts = await BlogPost.findAll();
+     
+     // Aguarda todas as promises serem resolvidas e retorna um array com todos os posts, 
+     // onde cada post tem um objeto de usuário e um array de categorias associados a ele
+     const postsWithUserAndCategories = await Promise.all(
+         allBlogPosts.map(async (post) => {
+             // Obtém o objeto de usuário associado ao post
+             const user = await User.findOne({ 
+                 where: { id: post.id }, 
+                 attributes: ['id', 'displayName', 'email', 'image'], 
+             });
+ 
+             // Obtém um array de objetos de categoria associados ao post
+             const categories = await Category.findAll({ 
+                 where: { id: post.id }, 
+             });
+ 
+             // Retorna um objeto que combina as propriedades do post, o objeto de usuário e o array de categorias
+             return { 
+                 ...post.dataValues, 
+                 user,
+                 categories,
+             };
+         }),
+     );
+ 
+     // Retorna o array de posts com os objetos de usuário e as categorias associadas a cada post
+     return postsWithUserAndCategories;
+};
+
+module.exports = { addNewPostAndBing, findBlogPosts };

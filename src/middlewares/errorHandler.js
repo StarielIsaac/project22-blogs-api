@@ -1,5 +1,4 @@
-// se existir error.status retorna um erro com status 500 com a mensagem do erro, se não
-// retorna apenas um erro genérico
+// se existir error.status retorna um erro com status 500 com a mensagem do erro
 const { TokenExpiredError, JsonWebTokenError } = require('jsonwebtoken');
 const ErrorLaunch = require('../utils/errorHandle');
 

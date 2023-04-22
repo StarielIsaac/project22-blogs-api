@@ -8,4 +8,9 @@ const addNewPostAndBing = async (req, res) => {
    return res.status(201).json(result);
 };
 
-module.exports = { addNewPostAndBing };
+const findBlogPosts = async (req, res) => {
+ const result = await postService.findBlogPosts();
+ return res.status(200).json(result);
+};
+
+module.exports = { addNewPostAndBing, findBlogPosts };
