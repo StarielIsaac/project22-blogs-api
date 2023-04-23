@@ -15,4 +15,6 @@ postRouter.put('/:id', middTokenValidade, validadefields, postController.updateO
 
 postRouter.post('', middTokenValidade, validadePost, postController.addNewPostAndBing);
 
+postRouter.delete('/:id', middTokenValidade, postController.deleteOnePostByID);
+
 module.exports = postRouter;

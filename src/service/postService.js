@@ -1,4 +1,5 @@
 const { BlogPost, PostCategory, User, Category } = require('../models');
+// construtor de erros personalizados
 const ErrorLaunch = require('../utils/errorHandle');
 
 // Cria um novo post no banco de dados com as informações passadas na request
@@ -104,4 +105,29 @@ const updateOneBlogPost = async (id, { title, content }, userId) => {
     return postUpdated;
 };
 
-module.exports = { addNewPostAndBing, findAllBlogPosts, findOneBlogPost, updateOneBlogPost };
+// Deleta um post específico com base no ID
+const deleteOnePostByID = async (id, userId) => {
+    // Procura o post no database pelo 'ID'
+    const blogPost = await BlogPost.findOne({ where: { id } });
+
+    // Se não houver um post com o ID fornecido, lança um erro
+    if (!blogPost) {
+        throw new ErrorLaunch('Post does not exist', 404);
+    }
+    // Verifica se o usuário é o autor do post
+    if (blogPost.userId !== userId) {
+        throw new ErrorLaunch('Unauthorized user', 401);
+    }
+    // Deleta o post selecionado pelo usuario
+    await BlogPost.destroy({ where: { id } });
+
+    return { message: 'Post deleted' };
+};
+
+module.exports = { 
+    addNewPostAndBing, 
+    findAllBlogPosts, 
+    findOneBlogPost, 
+    updateOneBlogPost,
+    deleteOnePostByID,
+};
