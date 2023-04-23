@@ -2,12 +2,12 @@ const { Router } = require('express');
 
 const userController = require('../controller/userController');
 const validadeUser = require('../middlewares/validadeUser');
-const middTokenValidade = require('../middlewares/MiddTokenValidade');
+const middValidateToken = require('../middlewares/MiddTokenValidade');
 
 const userRouter = Router();
 
 userRouter.post('', validadeUser, userController.createUser);
-userRouter.get('', middTokenValidade, userController.listUsers);
-userRouter.get('/:id', middTokenValidade, userController.findOneUser);
-
+userRouter.get('', middValidateToken, userController.listUsers);
+userRouter.get('/:id', middValidateToken, userController.findOneUser);
+userRouter.delete('/me', middValidateToken, userController.deleteMyAccount);
 module.exports = userRouter;
