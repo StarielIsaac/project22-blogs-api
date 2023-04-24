@@ -25,7 +25,7 @@ app.use('/login', loginRouter);
 app.use('/user', userRouter);
 // rota para o endpoint "/categories"
 app.use('/categories', categoryRouter);
-// rota para o endpoint "/post"
+// rota para o endpoint "/post" 
 app.use('/post', postRouter);
 
 // middleware de erro ( caso falha da request )

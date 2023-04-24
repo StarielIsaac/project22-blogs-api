@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory, User, Category } = require('../models');
+const { BlogPost, PostCategory, User, Category, Sequelize } = require('../models');
 // construtor de erros personalizados
 const ErrorLaunch = require('../utils/errorHandle');
 
@@ -21,7 +21,6 @@ await Promise.all(categoryIds.map((el) => PostCategory.create({
 // Retorna o novo post criado
 return newPost;
 };
-
 // Busca informações de todos os posts, com as categorias associadas a cada post e usuario.
 const findAllBlogPosts = async () => {
      // Obtém todos os posts do blog
@@ -54,7 +53,6 @@ const findAllBlogPosts = async () => {
      // Retorna o array de posts com os objetos de usuário e as categorias associadas a cada post
      return postsWithUserAndCategories;
 };
-
 // Busca um post específico com base no ID
 const findOneBlogPost = async (id) => {
     const oneBlogPost = await BlogPost.findOne({ where: { id } });
@@ -82,7 +80,6 @@ const findOneBlogPost = async (id) => {
         categories, // Adiciona as informações das categorias
     };
 };
-
 // Atualiza um post específico com base no ID
 const updateOneBlogPost = async (id, { title, content }, userId) => {
     const blogPost = await BlogPost.findOne({ where: { id } });
@@ -104,7 +101,6 @@ const updateOneBlogPost = async (id, { title, content }, userId) => {
     // Retorna as informações atualizadas do post
     return postUpdated;
 };
-
 // Deleta um post específico com base no ID
 const deleteOnePostByID = async (id, userId) => {
     // Procura o post no database pelo 'ID'
@@ -123,6 +119,24 @@ const deleteOnePostByID = async (id, userId) => {
 
     return { message: 'Post deleted' };
 };
+// Pesquisa postagens de blog com base em um termo de pesquisa
+const findPostByTerm = async (term) => {
+    const posts = await BlogPost.findAll({
+        where: {
+          [Sequelize.Op.or]: [
+            { title: { [Sequelize.Op.substring]: term } },
+            { content: { [Sequelize.Op.substring]: term } },
+          ],
+        },
+        include: [
+          { model: User, as: 'user', attributes: { exclude: ['password'] } },
+          { model: Category,
+            as: 'categories',
+            through: { attributes: [] } },
+        ],
+      });
+     return posts;
+};
 
 module.exports = { 
     addNewPostAndBing, 
@@ -130,4 +144,5 @@ module.exports = {
     findOneBlogPost, 
     updateOneBlogPost,
     deleteOnePostByID,
+    findPostByTerm,
 };

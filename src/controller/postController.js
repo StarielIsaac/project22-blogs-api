@@ -9,7 +9,7 @@ const addNewPostAndBing = async (req, res) => {
 };
 // Busca todos os posts registrados
 const findAllBlogPosts = async (req, res) => {
- const result = await postService.findBlogPosts();
+ const result = await postService.findAllBlogPosts();
  return res.status(200).json(result);
 };
 // Busca todos um post pelo 'ID'
@@ -29,12 +29,20 @@ const updateOneBlogPost = async (req, res) => {
   };
 // Deleta um post pelo 'ID'
 const deleteOnePostByID = async (req, res) => {
-const { id } = req.params;
-const { id: userId } = req.user;
+   const { id } = req.params;
+   const { id: userId } = req.user;
 
-await postService.deleteOnePostByID(id, userId);
+   await postService.deleteOnePostByID(id, userId);
 
-res.status(204).end();
+   res.status(204).end();
+};
+// Busca informaçoẽs de um post especifico pelo termo passado na URL -> /post/search?q=:searchTerm
+const findPostByTerm = async (req, res) => {
+   const { q: term } = req.query;
+      
+   const result = await postService.findPostByTerm(term);
+      
+   res.status(200).json(result);
 };
 
 module.exports = {
@@ -43,4 +51,5 @@ module.exports = {
     findOneBlogPost, 
     updateOneBlogPost,
     deleteOnePostByID,
+    findPostByTerm,
 };

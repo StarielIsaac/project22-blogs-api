@@ -7,6 +7,8 @@ const validadefields = require('../middlewares/validadefields');
 
 const postRouter = Router();
 
+postRouter.get('/search', middTokenValidade, postController.findPostByTerm);
+
 postRouter.get('', middTokenValidade, postController.findAllBlogPosts);
 
 postRouter.get('/:id', middTokenValidade, postController.findOneBlogPost);
