@@ -3,6 +3,7 @@ const { TokenExpiredError, JsonWebTokenError } = require('jsonwebtoken');
 const ErrorLaunch = require('../utils/errorHandle');
 
 module.exports = (error, _req, res, _next) => {
+  console.log(error);
   if (error instanceof ErrorLaunch) {
     return res.status(error.code).json({ message: error.message });
   }

@@ -49,7 +49,7 @@ const findOneUser = async (id) => {
 // Função que deleta a conta do usuário atualmente autenticado
 const deleteMyAccount = async (id) => {
    const findedUser = await User.findOne({ where: { id } });
-   // console.log(findedUser);
+   console.log(findedUser);
 
 // Verifica se o usuário existe antes de deletar a conta
   if (!findedUser) {

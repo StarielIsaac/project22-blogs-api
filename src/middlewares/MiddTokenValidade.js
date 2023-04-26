@@ -1,7 +1,7 @@
 const { validateToken } = require('../utils/auth');
 // const errorMensage = require('../utils/errorMensage');
 
-// middleware para validar se o tokens estão 
+// middleware que verifica se o token é valido
 const middValidateToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
@@ -9,7 +9,6 @@ const middValidateToken = async (req, res, next) => {
             // throw errorMensage(401, 'Token not found');
             return res.status(401).json({ message: 'Token not found' });
         }
-        // req.user = validateToken(token);
         const validate = validateToken(token);
         req.user = validate;
 

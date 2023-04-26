@@ -20,7 +20,7 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 
 // rota para o endpoint "/login"
-app.use('/login', loginRouter); 
+app.use('/login', loginRouter);   
 // rota para o endpoint "/user"
 app.use('/user', userRouter);
 // rota para o endpoint "/categories"

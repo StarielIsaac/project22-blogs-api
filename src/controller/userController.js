@@ -20,7 +20,7 @@ const findOneUser = async (req, res) => {
 };
 // Exclui a conta do usuário atual com base em suas credenciais de autenticação
 const deleteMyAccount = async (req, res) => {
-   const { id } = req.user;
+   const { user: { id } } = req;
    await userService.deleteMyAccount(id);
    res.status(204).send();
 };
