@@ -1,20 +1,18 @@
 const { Category } = require('../models');
-// const ErrorLaunch = require('../utils/errorHandle');
 
-// funcao que verifica se o token existe, se sim cria um token e retorna-o
+// Cria uma nova instância de Category com o nome recebido como parâmetro e salva no banco de dados.
 const createNewCategories = async ({ name }) => {
     const category = await Category.create({ name });
-    // if () {
-    //   throw new ErrorLaunch();
-    // }
 
     return category;
   };
   
+  // Busca todas as categorias cadastradas no banco de dados.
   const getAllCategories = async () => {
     const allCategory = await Category.findAll();
     
     return allCategory;
   };
   
+  // Exporta as funções createNewCategories e getAllCategories
   module.exports = { createNewCategories, getAllCategories };
