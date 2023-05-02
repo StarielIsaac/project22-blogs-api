@@ -88,7 +88,7 @@ module.exports = {
 
 **(Neste arquivo, o nome do database deve ser  `"database": 'blogs_api'`)**
 
-#### Variáveis:
+### Variáveis:
 
 **É essencial usar as seguintes variáveis no arquivo abaixo:**
 
@@ -100,17 +100,17 @@ Com elas, vamos nos conectar ao banco de dados do avaliador.
 
 `password: process.env.MYSQL_PASSWORD`
 
-#### Variável JWT (opcional):
+### Variável JWT (opcional):
 
-**Se desejar você pode criar sua variável de ambiente para o SECRET do JWT, no arquivo .env (opcional).**
+**Se desejar você pode criar sua variável de ambiente para o SECRET do JWT, no arquivo config.js (opcional).**
 
-```.env
+```js
 JWT_SECRET=suaSenhaSecreta
 ```
 
 ---
 
-#### Dicas
+### Dicas
 
   **OBSERVAÇÂO: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
 
@@ -119,12 +119,19 @@ JWT_SECRET=suaSenhaSecreta
   "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $" -- Cria o banco e gera as tabelas
 
   "seed": "npx sequelize-cli db:seed:all $", -- Insere dados na tabela
-
-
+  
+  
   **Haverá um arquivo na pasta `/seeders` que terá as querys para inserir dados no datebase `(não remover)`.**
+  
+ 
+  (**_qualquer duvida sobre qual comando rodar consulte o arquivo '.package.json'_**)
+
 
 ---
-  ##### Projeto desenvolvido por _Stariel Isaac_...
+
+<p align="center">
+  <b>Projeto desenvolvido por Stariel Isaac...</b>
+</p>
 
 
   
